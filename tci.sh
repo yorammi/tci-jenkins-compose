@@ -65,7 +65,6 @@ if [[ "$action" == "start"  || "$action" == "restart" ]]; then
     do
         echo ${LOGLINE}
         [[ "${LOGLINE}" == *"Entering quiet mode. Done..."* ]] && pkill -P $$ docker-compose
-        counter=$(( $counter + 1 ))
     done
-
+    echo "tci-server loaded successfully"
 fi
