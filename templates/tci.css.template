@@ -1,0 +1,26 @@
+#jenkins-head-icon {
+    width:0px;
+    height:0px;
+    padding: 19px;
+background: url(tci-small-logo.png);
+}
+#header {
+    background-color: TCI_BANNER_COLOR;
+    height: 40px;
+}
+
+
+.logo span {
+    display: none;
+  }
+
+  .logo:after {
+    content: 'TCI_SERVER_TITLE_TEXT';
+    font-weight: bold;
+    font-size: 26px;
+    position: relative;
+    right: -160px;
+    top: 10px;
+    display: block;
+    color: TCI_SERVER_TITLE_COLOR;
+  }

@@ -1,0 +1,5 @@
+.idea/
+.data/
+config.yml
+docker-compose.yml
+tci.config
