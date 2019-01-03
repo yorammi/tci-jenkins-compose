@@ -2,10 +2,9 @@
 
 set -e
 
+action='restart'
 if [[ $# > 0 ]]; then
     action=$1
-else
-    action='restart'
 fi
 
 if [[ "$action" == "upgrade" ]]; then
