@@ -6,7 +6,6 @@ security:
   - '.*PASSWORD.*'
 
 jenkins:
-  slaveAgentPort: 50000
   numExecutors: 0
 
 credentials:
