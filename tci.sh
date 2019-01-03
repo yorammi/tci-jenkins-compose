@@ -8,10 +8,10 @@ fi
 source tci.config
 
 if [ ! -f docker-compose.yml ]; then
-    cp ../../src/resources/config/tci-server/docker-compose.yml.template docker-compose.yml
+    cp templates/docker-compose.yml.template docker-compose.yml
 fi
 if [ ! -f config.yml ]; then
-    cp ../../src/resources/config/tci-server/config.yml.template config.yml
+    cp templates/config.yml.template config.yml
 fi
 
 # set action defaulted to 'restart'
