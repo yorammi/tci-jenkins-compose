@@ -2,22 +2,36 @@
 
 set -e
 
+if [[ $# > 0 ]]; then
+    action=$1
+else
+    action='restart'
+fi
+
+if [[ "$action" == "upgrade" ]]; then
+    git pull origin HEAD
+fi
+
+
 if [ ! -f tci.config ]; then
     cp templates/tci.config.template tci.config
+    action='init'
 fi
+
+source templates/tci.config.template
 source tci.config
+
+if [[ "$action" == "init" || "$action" == "upgrade" ]]; then
+    echo "Initializing tci-server. You'll need to restart the server after that action."
+    . ./scripts/init-tci.sh
+fi
+
 
 if [ ! -f docker-compose.yml ]; then
     cp templates/docker-compose.yml.template docker-compose.yml
 fi
 if [ ! -f config.yml ]; then
     cp templates/config.yml.template config.yml
-fi
-
-# set action defaulted to 'restart'
-action='restart'
-if [[ $# > 0 ]]; then
-   action=$1
 fi
 
 if [ ! -n "$TCI_HOST_IP" ]; then
@@ -29,6 +43,8 @@ export GIT_PRIVATE_KEY=`cat $GITHUB_PRIVATE_KEY_FILE_PATH`
 if [[ "$action" == "info" ]]; then
     echo [Server host IP address] $TCI_HOST_IP
     echo [Private SSH key file path] $GITHUB_PRIVATE_KEY_FILE_PATH
+    echo [TCI HTTP port] $JENKINS_HTTP_PORT_FOR_SLAVES
+    echo [TCI JNLP port for slaves] $JENKINS_SLAVE_AGENT_PORT
     exit 0
 fi
 
