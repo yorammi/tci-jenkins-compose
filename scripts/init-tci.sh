@@ -56,5 +56,6 @@ export JENKINS_SLAVE_AGENT_PORT=$JENKINS_SLAVE_AGENT_PORT
 #export TCI_HOST_IP=$TCI_HOST_IP
 #export TCI_HOST_IP=
 
-cat temp/tci.config
+cp temp/tci.config tci.config
+
 
