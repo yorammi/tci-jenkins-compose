@@ -17,8 +17,8 @@ read -p "TCI branner title [$TCI_SERVER_TITLE_TEXT]? " -r
 if [[ "$REPLY" != "" ]]; then
     TCI_SERVER_TITLE_TEXT="$REPLY"
 fi
-echo TCI_SERVER_TITLE_TEXT=$TCI_SERVER_TITLE_TEXT  >> temp/tci.config
-export TCI_SERVER_TITLE_TEXT=$TCI_SERVER_TITLE_TEXT
+echo TCI_SERVER_TITLE_TEXT=\'$TCI_SERVER_TITLE_TEXT\'  >> temp/tci.config
+export TCI_SERVER_TITLE_TEXT=\'$TCI_SERVER_TITLE_TEXT\'
 
 read -p "TCI branner title color [$TCI_SERVER_TITLE_COLOR]? " -r
 if [[ "$REPLY" != "" ]]; then

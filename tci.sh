@@ -6,7 +6,6 @@ action='restart'
 if [[ $# > 0 ]]; then
     action=$1
 fi
-
 if [[ "$action" == "upgrade" ]]; then
     git pull origin HEAD
 fi
@@ -24,7 +23,6 @@ if [[ "$action" == "init" || "$action" == "upgrade" ]]; then
     echo "Initializing tci-server. You'll need to restart the server after that action."
     . ./scripts/init-tci.sh
 fi
-
 
 if [ ! -f docker-compose.yml ]; then
     cp templates/docker-compose.yml.template docker-compose.yml
