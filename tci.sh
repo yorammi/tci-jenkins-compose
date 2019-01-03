@@ -61,19 +61,11 @@ if [[ "$action" == "start"  || "$action" == "restart" ]]; then
     cp -f templates/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml | true
     docker-compose up -d
     sleep 2
-    counter=0
     docker-compose logs -f | while read LOGLINE
     do
-        if [[ $counter == 0 ]]; then
-            echo -n "*"
-        else
-            echo -n .
-        fi
+        echo ${LOGLINE}
         [[ "${LOGLINE}" == *"Entering quiet mode. Done..."* ]] && pkill -P $$ docker-compose
         counter=$(( $counter + 1 ))
-        if [[ $counter == 5 ]]; then
-            counter=0
-        fi
     done
 
 fi
