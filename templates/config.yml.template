@@ -5,9 +5,6 @@ security:
   remove_master_envvars:
   - '.*PASSWORD.*'
 
-jenkins:
-  numExecutors: 0
-
 credentials:
   gitsshkey:
     type: sshkey

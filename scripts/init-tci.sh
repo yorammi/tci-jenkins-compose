@@ -48,6 +48,13 @@ fi
 echo export JENKINS_SLAVE_AGENT_PORT=$JENKINS_SLAVE_AGENT_PORT  >> temp/tci.config
 export JENKINS_SLAVE_AGENT_PORT=$JENKINS_SLAVE_AGENT_PORT
 
+read -p "Number of exeuters on master [$JENKINS_ENV_EXECUTERS]? " -r
+if [[ "$REPLY" != "" ]]; then
+    JENKINS_ENV_EXECUTERS="$REPLY"
+fi
+echo export JENKINS_ENV_EXECUTERS=$JENKINS_ENV_EXECUTERS >> temp/tci.config
+export JENKINS_ENV_EXECUTERS=$JENKINS_ENV_EXECUTERS
+
 #read -p "TCI host IP address [$TCI_HOST_IP]? " -r
 #if [[ "$REPLY" != "" ]]; then
 #    TCI_HOST_IP="$REPLY"
