@@ -42,6 +42,7 @@ if [[ "$action" == "info" ]]; then
     echo [Private SSH key file path] $GITHUB_PRIVATE_KEY_FILE_PATH
     echo [TCI HTTP port] $JENKINS_HTTP_PORT_FOR_SLAVES
     echo [TCI JNLP port for slaves] $JENKINS_SLAVE_AGENT_PORT
+    echo [TCI number of master executors] $JENKINS_ENV_EXECUTERS
     exit 0
 fi
 
@@ -58,7 +59,7 @@ if [[ "$action" == "start"  || "$action" == "restart" ]]; then
     mkdir -p .data/jenkins_home/userContent
     cp -f images/tci-small-logo.png .data/jenkins_home/userContent | true
     sed "s/TCI_SERVER_TITLE_TEXT/${TCI_SERVER_TITLE_TEXT}/ ; s/TCI_SERVER_TITLE_COLOR/${TCI_SERVER_TITLE_COLOR}/ ; s/TCI_BANNER_COLOR/${TCI_BANNER_COLOR}/" templates/tci.css.template > .data/jenkins_home/userContent/tci.css
-    cp -f templates/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml | true
+    cp -f templates/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
     docker-compose up -d
     sleep 2
     docker-compose logs -f | while read LOGLINE

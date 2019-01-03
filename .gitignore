@@ -3,3 +3,4 @@
 config.yml
 docker-compose.yml
 tci.config
+temp/
