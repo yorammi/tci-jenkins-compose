@@ -6,6 +6,13 @@ mkdir -p temp
 echo "#!/bin/bash" > temp/tci.config
 echo -e "" >> temp/tci.config
 
+read -p "tci-master image [$TCI_MASTER_VERSION]? " -r
+if [[ "$REPLY" != "" ]]; then
+    TCI_MASTER_VERSION="$REPLY"
+fi
+echo export TCI_MASTER_VERSION=$TCI_MASTER_VERSION >> temp/tci.config
+export TCI_MASTER_VERSION=$TCI_MASTER_VERSION
+
 read -p "GitHub private key file path [$GITHUB_PRIVATE_KEY_FILE_PATH]? " -r
 if [[ "$REPLY" != "" ]]; then
     GITHUB_PRIVATE_KEY_FILE_PATH="$REPLY"

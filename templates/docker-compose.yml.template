@@ -2,7 +2,7 @@ version: '2'
 services:
   tci-server:
     restart: always
-    image: tci-master
+    image: $TCI_MASTER_VERSION
     ports:
       - '${JENKINS_HTTP_PORT_FOR_SLAVES}:8080'
       - '${JENKINS_SLAVE_AGENT_PORT}:${JENKINS_SLAVE_AGENT_PORT}'
