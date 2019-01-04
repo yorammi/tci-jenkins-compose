@@ -19,6 +19,10 @@ tools:
       type: maven
       installers:
         - id: '3.6.0'
+
+environment:
+  TCI_DEBUG_MODE: '#{TCI_DEBUG_MODE}'
+
 clouds:
   tci-jnlp-nodes:
     type: docker

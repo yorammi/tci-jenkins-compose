@@ -62,6 +62,13 @@ fi
 echo export JENKINS_ENV_EXECUTERS=$JENKINS_ENV_EXECUTERS >> temp/tci.config
 export JENKINS_ENV_EXECUTERS=$JENKINS_ENV_EXECUTERS
 
+read -p "tci in debug mode [$TCI_DEBUG_MODEN]? " -r
+if [[ "$REPLY" != "" ]]; then
+    TCI_DEBUG_MODE="$REPLY"
+fi
+echo export TCI_DEBUG_MODE=$TCI_DEBUG_MODE >> temp/tci.config
+export TCI_DEBUG_MODE=$TCI_DEBUG_MODE
+
 #read -p "TCI host IP address [$TCI_HOST_IP]? " -r
 #if [[ "$REPLY" != "" ]]; then
 #    TCI_HOST_IP="$REPLY"
