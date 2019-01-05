@@ -1,0 +1,8 @@
+configuration_as_code:
+  unclassified:
+  ## https://github.com/jenkinsci/configuration-as-code-plugin/blob/1f79326e902fe721a3a05077a7e46f98569804ff/demos/simple-theme-plugin/README.md
+    simple-theme-plugin:
+      elements:
+      - cssUrl:
+          url: "/userContent/tci.css"
+

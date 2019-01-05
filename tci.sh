@@ -55,7 +55,7 @@ mkdir -p customization/files
 cp -n -R templates/files/* customization/files/ 2> /dev/null | true
 cp -R customization/files/* . 2> /dev/null | true
 
-cp -f templates/tci-server/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
+#cp -f templates/tci-server/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
 
 if [[ "$action" == "apply" ]]; then
     exit 0
