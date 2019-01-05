@@ -1,9 +1,0 @@
-
-notifiers:
-  slack:
-    teamDomain: tikal
-    botUser: true
-    room: octous
-    baseUrl: https://tci.tikal.io/
-    sendAs: TCIbot
-    credentialId: slack # should be defined in credentials section

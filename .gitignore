@@ -4,6 +4,6 @@ tci-master-config.yml
 docker-compose.yml
 tci.config
 temp/
-customization/
+customization*/
 traefik/
 acme.json
