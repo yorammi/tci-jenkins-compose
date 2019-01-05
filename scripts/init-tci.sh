@@ -20,26 +20,26 @@ fi
 echo export GITHUB_PRIVATE_KEY_FILE_PATH=$GITHUB_PRIVATE_KEY_FILE_PATH >> temp/tci.config
 export GITHUB_PRIVATE_KEY_FILE_PATH=$GITHUB_PRIVATE_KEY_FILE_PATH
 
-read -p "TCI branner title [$TCI_SERVER_TITLE_TEXT]? " -r
+read -p "TCI branner title [$TCI_MASTER_TITLE_TEXT]? " -r
 if [[ "$REPLY" != "" ]]; then
-    TCI_SERVER_TITLE_TEXT="$REPLY"
+    TCI_MASTER_TITLE_TEXT="$REPLY"
 fi
-echo export TCI_SERVER_TITLE_TEXT=\'$TCI_SERVER_TITLE_TEXT\'  >> temp/tci.config
-export TCI_SERVER_TITLE_TEXT=\'$TCI_SERVER_TITLE_TEXT\'
+echo export TCI_MASTER_TITLE_TEXT=\'$TCI_MASTER_TITLE_TEXT\'  >> temp/tci.config
+export TCI_MASTER_TITLE_TEXT=\'$TCI_MASTER_TITLE_TEXT\'
 
-read -p "TCI branner title color [$TCI_SERVER_TITLE_COLOR]? " -r
+read -p "TCI branner title color [$TCI_MASTER_TITLE_COLOR]? " -r
 if [[ "$REPLY" != "" ]]; then
-    TCI_SERVER_TITLE_COLOR="$REPLY"
+    TCI_MASTER_TITLE_COLOR="$REPLY"
 fi
-echo export TCI_SERVER_TITLE_COLOR=$TCI_SERVER_TITLE_COLOR  >> temp/tci.config
-export TCI_SERVER_TITLE_COLOR=$TCI_SERVER_TITLE_COLOR
+echo export TCI_MASTER_TITLE_COLOR=$TCI_MASTER_TITLE_COLOR  >> temp/tci.config
+export TCI_MASTER_TITLE_COLOR=$TCI_MASTER_TITLE_COLOR
 
-read -p "TCI branner background color [$TCI_BANNER_COLOR]? " -r
+read -p "TCI banner background color [$TCI_MASTER_BANNER_COLOR]? " -r
 if [[ "$REPLY" != "" ]]; then
-    TCI_BANNER_COLOR="$REPLY"
+    TCI_MASTER_BANNER_COLOR="$REPLY"
 fi
-echo export TCI_BANNER_COLOR=$TCI_BANNER_COLOR  >> temp/tci.config
-export TCI_BANNER_COLOR=$TCI_BANNER_COLOR
+echo export TCI_MASTER_BANNER_COLOR=$TCI_MASTER_BANNER_COLOR  >> temp/tci.config
+export TCI_MASTER_BANNER_COLOR=$TCI_MASTER_BANNER_COLOR
 
 read -p "Jenkins server HTTP port [$JENKINS_HTTP_PORT_FOR_SLAVES]? " -r
 if [[ "$REPLY" != "" ]]; then

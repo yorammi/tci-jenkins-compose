@@ -2,9 +2,9 @@
 
 export TCI_MASTER_VERSION='tikalci/tci-master-minimal:lts'
 export GITHUB_PRIVATE_KEY_FILE_PATH=~/.ssh/id_rsa
-export TCI_SERVER_TITLE_TEXT='TCI'
-export TCI_SERVER_TITLE_COLOR=orange
-export TCI_BANNER_COLOR=darkblue
+export TCI_MASTER_TITLE_TEXT='TCI'
+export TCI_MASTER_TITLE_COLOR=orange
+export TCI_MASTER_BANNER_COLOR=darkblue
 export JENKINS_HTTP_PORT_FOR_SLAVES=8080
 export JENKINS_SLAVE_AGENT_PORT=50000
 export JENKINS_ENV_EXECUTERS=0

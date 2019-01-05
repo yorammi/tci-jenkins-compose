@@ -1,0 +1,61 @@
+security:
+  realm: jenkins_database
+  adminPassword: ${JENKINS_ADMIN_PASSWORD}
+
+  remove_master_envvars:
+  - '.*PASSWORD.*'
+
+credentials:
+  gitsshkey:
+    type: sshkey
+    description: gitsshkey
+    username: gitsshkey
+    passphrase:
+    privatekey: |
+      ${GIT_PRIVATE_KEY}
+
+tools:
+  installations:
+    maven:
+      type: maven
+      installers:
+        - id: '3.6.0'
+
+environment:
+  TCI_DEBUG_MODE: '#{TCI_DEBUG_MODE}'
+
+clouds:
+  tci-jnlp-nodes:
+    type: docker
+    dockerHostUri: 'unix:///var/run/docker.sock'
+    templates:
+      - name: tci-jnlp-node
+        image: tikalci/tci-jnlp-node:latest
+        labels:
+          - tci-jnlp-node
+        remoteFs: /home/jenkins
+        jvmArgs: -Xmx1g
+        volumes:
+          - '/var/run/docker.sock:/var/run/docker.sock'
+        instanceCap: '10'
+
+pipeline_libraries:
+  tci-library:
+    source:
+      remote: git@github.com:TikalCI/tci-library.git
+      credentialsId: gitsshkey
+    defaultVersion: master
+    implicit: false
+    allowVersionOverride: true
+    includeInChangesets: true
+
+seed_jobs:
+  tci-master-sanity-check:
+    source:
+      remote: git@github.com:TikalCI/tci-pipelines.git
+      branch: 'master'
+      credentialsId: gitsshkey
+
+    pipeline: src/pipelines/bootstrap/tci-master-sanity-check/Jenkinsfile
+    executeWhen: never
+

@@ -1,7 +1,8 @@
 .idea/
 .data/
-tci-server-config.yml
+tci-master-config.yml
 docker-compose.yml
 tci.config
 temp/
 customization/
+traefik/

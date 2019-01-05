@@ -13,6 +13,7 @@ credentials:
     passphrase:
     privatekey: |
       ${GIT_PRIVATE_KEY}
+
 tools:
   installations:
     maven:
@@ -49,11 +50,12 @@ pipeline_libraries:
     includeInChangesets: true
 
 seed_jobs:
-  tci-server-sanity-check:
+  tci-master-sanity-check:
     source:
       remote: git@github.com:TikalCI/tci-pipelines.git
-      branch: '${TCI_PIPELINES_BRANCH}'
+      branch: 'master'
       credentialsId: gitsshkey
 
-    pipeline: src/pipelines/bootstrap/tci-server-sanity-check/Jenkinsfile
+    pipeline: src/pipelines/bootstrap/tci-master-sanity-check/Jenkinsfile
     executeWhen: never
+
