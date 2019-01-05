@@ -18,7 +18,7 @@ In order to establish a <img src="/images/tci-server.png" width="60" height="60"
 1. The first load will take at least 10 minutes, so please wait until the prompt is back.
 1. Once the load is over, browse to [http://localhost:8080](http://localhost:8080) and login with admin/admin credentials.
 
-Once the server is up, you can modify it (e.g. add LDAP configuration, add seed jobs, add credentials and much more) following the instructions as in [tci-master](https://github.com/TikalCI/tci-master).
+Once the server is up, you can modify it (e.g. add LDAP configuration, add seed jobs, add credentials and much more) following the instructions as in [tci-bloody-jenkins](https://github.com/TikalCI/tci-bloody-jenkins) and all files in the 'customization' folder.
 
 The _**./tci.sh**_ script have the following actions: **start**, **stop**, **restart**, **info**, **init**, **upgrade**, **status**.
 
