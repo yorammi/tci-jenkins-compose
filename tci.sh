@@ -16,11 +16,6 @@ if [ ! -f tci.config ]; then
     action='init'
 fi
 
-mkdir -p customization/docker-compose
-mkdir -p customization/files
-mkdir -p customization/userContent
-mkdir -p customization/tci-master
-
 source templates/tci-server/tci.config.template
 source tci.config
 
@@ -29,6 +24,7 @@ if [[ "$action" == "init" || "$action" == "upgrade" ]]; then
     . ./scripts/init-tci.sh
 fi
 
+mkdir -p customization/docker-compose
 if [ ! -f customization/docker-compose/docker-compose.yml.template ]; then
     cp templates/docker-compose/docker-compose.yml.template customization/docker-compose/docker-compose.yml.template
 fi
@@ -41,24 +37,24 @@ if [[ "$numberOfFiles" != "0" ]]; then
     cat customization/docker-compose/*.yml >> docker-compose.yml | true
 fi
 
-#if [ ! -f customization/tci-master/tci-master-config.yml.template ]; then
-#    cp templates/tci-master/tci-master-config.yml.template customization/tci-master/tci-master-config.yml.template
-#fi
-cp -n templates/tci-master/*.yml customization/tci-master/ | true
-echo after
+mkdir -p customization/tci-master
+cp -n templates/tci-master/*.yml customization/tci-master/ 2> /dev/null | true
 echo "# PLEASE NOTICE:" > tci-master-config.yml
 echo "# This is a generated file, so any change in it will be lost on the next TCI action!" >> tci-master-config.yml
 echo "" >> tci-master-config.yml
-#cat customization/tci-master/tci-master-config.yml.template >> tci-master-config.yml
 numberOfFiles=`ls -1q customization/tci-master/*.yml 2> /dev/null | wc -l | xargs`
 cat customization/tci-master/*.yml >> tci-master-config.yml | true
-#if [[ "$numberOfFiles" != "0" ]]; then
-#    cat customization/tci-master/*.yml >> tci-master-config.yml | true
-#fi
 
+mkdir -p customization/userContent
+cp -n templates/userContent/* customization/userContent/ 2> /dev/null | true
+sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > customization/userContent/tci.css
 mkdir -p .data/jenkins_home/userContent
-cp -f images/tci-small-logo.png .data/jenkins_home/userContent | true
-sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > .data/jenkins_home/userContent/tci.css
+cp customization/userContent/* .data/jenkins_home/userContent 2> /dev/null | true
+
+mkdir -p customization/files
+cp -n -R templates/files/* customization/files/ 2> /dev/null | true
+cp -R customization/files/* . 2> /dev/null | true
+
 cp -f templates/tci-server/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
 
 if [[ "$action" == "apply" ]]; then
