@@ -12,11 +12,15 @@ fi
 
 
 if [ ! -f tci.config ]; then
-    cp templates/tci.config.template tci.config
+    cp templates/tci-server/tci.config.template tci.config
     action='init'
 fi
 
-source templates/tci.config.template
+mkdir -p customization/docker-compose
+mkdir -p customization/files
+mkdir -p customization/tci-server
+
+source templates/tci-server/tci.config.template
 source tci.config
 
 if [[ "$action" == "init" || "$action" == "upgrade" ]]; then
@@ -25,10 +29,10 @@ if [[ "$action" == "init" || "$action" == "upgrade" ]]; then
 fi
 
 if [ ! -f docker-compose.yml ]; then
-    cp templates/docker-compose.yml.template docker-compose.yml
+    cp templates/tci-server/docker-compose.yml.template docker-compose.yml
 fi
 if [ ! -f config.yml ]; then
-    cp templates/config.yml.template config.yml
+    cp templates/tci-server/config.yml.template config.yml
 fi
 
 if [ ! -n "$TCI_HOST_IP" ]; then
@@ -55,8 +59,8 @@ if [[ "$action" == "start"  || "$action" == "restart" ]]; then
 
     mkdir -p .data/jenkins_home/userContent
     cp -f images/tci-small-logo.png .data/jenkins_home/userContent | true
-    sed "s/TCI_SERVER_TITLE_TEXT/${TCI_SERVER_TITLE_TEXT}/ ; s/TCI_SERVER_TITLE_COLOR/${TCI_SERVER_TITLE_COLOR}/ ; s/TCI_BANNER_COLOR/${TCI_BANNER_COLOR}/" templates/tci.css.template > .data/jenkins_home/userContent/tci.css
-    cp -f templates/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
+    sed "s/TCI_SERVER_TITLE_TEXT/${TCI_SERVER_TITLE_TEXT}/ ; s/TCI_SERVER_TITLE_COLOR/${TCI_SERVER_TITLE_COLOR}/ ; s/TCI_BANNER_COLOR/${TCI_BANNER_COLOR}/" templates/tci-server/tci.css.template > .data/jenkins_home/userContent/tci.css
+    cp -f templates/tci-server/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
     docker-compose up -d
     sleep 2
     docker-compose logs -f | while read LOGLINE
