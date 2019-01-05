@@ -7,7 +7,7 @@ services:
       - '${JENKINS_HTTP_PORT_FOR_SLAVES}:8080'
       - '${JENKINS_SLAVE_AGENT_PORT}:${JENKINS_SLAVE_AGENT_PORT}'
     volumes:
-      - '${PWD}/config.yml:/config.yml'
+      - '${PWD}/tci-server-config.yml:/tci-server-config.yml'
       - '.data/jenkins_home:/var/jenkins_home'
       - '.data/jenkins-workspace-home:/jenkins-workspace-home'
       - '/var/run/docker.sock:/var/run/docker.sock'
@@ -17,7 +17,7 @@ services:
       JAVA_OPTS_LOAD_STATS_CLOCK: ''
       JENKINS_ENV_ADMIN_USER: admin
       JENKINS_ENV_HOST_IP: ${TCI_HOST_IP}
-      JENKINS_ENV_CONFIG_YML_URL: file:///config.yml
+      JENKINS_ENV_CONFIG_YML_URL: file:///tci-server-config.yml
       JENKINS_ENV_QUIET_STARTUP_PERIOD: 120
       JENKINS_ADMIN_PASSWORD: admin
       JENKINS_HTTP_PORT_FOR_SLAVES: ${JENKINS_HTTP_PORT_FOR_SLAVES}

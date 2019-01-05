@@ -1,6 +1,7 @@
 .idea/
 .data/
-config.yml
+tci-server-config.yml
 docker-compose.yml
 tci.config
 temp/
+customization/

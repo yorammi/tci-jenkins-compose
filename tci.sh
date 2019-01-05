@@ -31,8 +31,8 @@ fi
 if [ ! -f docker-compose.yml ]; then
     cp templates/tci-server/docker-compose.yml.template docker-compose.yml
 fi
-if [ ! -f config.yml ]; then
-    cp templates/tci-server/config.yml.template config.yml
+if [ ! -f tci-server-config.yml ]; then
+    cp templates/tci-server/tci-server-config.yml.template tci-server-config.yml
 fi
 
 if [ ! -n "$TCI_HOST_IP" ]; then
