@@ -1,0 +1,15 @@
+clouds:
+  tci-jnlp-nodes:
+    type: docker
+    dockerHostUri: 'unix:///var/run/docker.sock'
+    templates:
+      - name: tci-jnlp-node
+        image: tikalci/tci-jnlp-node:latest
+        labels:
+          - tci-jnlp-node
+        remoteFs: /home/jenkins
+        jvmArgs: -Xmx1g
+        volumes:
+          - '/var/run/docker.sock:/var/run/docker.sock'
+        instanceCap: '10'
+

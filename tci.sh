@@ -41,17 +41,20 @@ if [[ "$numberOfFiles" != "0" ]]; then
     cat customization/docker-compose/*.yml >> docker-compose.yml | true
 fi
 
-if [ ! -f customization/tci-master/tci-master-config.yml.template ]; then
-    cp templates/tci-master/tci-master-config.yml.template customization/tci-master/tci-master-config.yml.template
-fi
+#if [ ! -f customization/tci-master/tci-master-config.yml.template ]; then
+#    cp templates/tci-master/tci-master-config.yml.template customization/tci-master/tci-master-config.yml.template
+#fi
+cp -n templates/tci-master/*.yml customization/tci-master/ | true
+echo after
 echo "# PLEASE NOTICE:" > tci-master-config.yml
 echo "# This is a generated file, so any change in it will be lost on the next TCI action!" >> tci-master-config.yml
 echo "" >> tci-master-config.yml
-cat customization/tci-master/tci-master-config.yml.template >> tci-master-config.yml
+#cat customization/tci-master/tci-master-config.yml.template >> tci-master-config.yml
 numberOfFiles=`ls -1q customization/tci-master/*.yml 2> /dev/null | wc -l | xargs`
-if [[ "$numberOfFiles" != "0" ]]; then
-    cat customization/tci-master/*.yml >> tci-master-config.yml | true
-fi
+cat customization/tci-master/*.yml >> tci-master-config.yml | true
+#if [[ "$numberOfFiles" != "0" ]]; then
+#    cat customization/tci-master/*.yml >> tci-master-config.yml | true
+#fi
 
 mkdir -p .data/jenkins_home/userContent
 cp -f images/tci-small-logo.png .data/jenkins_home/userContent | true

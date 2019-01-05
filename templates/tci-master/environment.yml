@@ -1,0 +1,3 @@
+environment:
+  TCI_DEBUG_MODE: '#{TCI_DEBUG_MODE}'
+

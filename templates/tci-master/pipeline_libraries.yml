@@ -1,0 +1,10 @@
+pipeline_libraries:
+  tci-library:
+    source:
+      remote: git@github.com:TikalCI/tci-library.git
+      credentialsId: gitsshkey
+    defaultVersion: master
+    implicit: false
+    allowVersionOverride: true
+    includeInChangesets: true
+
