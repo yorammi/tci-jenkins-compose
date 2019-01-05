@@ -6,3 +6,4 @@ tci.config
 temp/
 customization/
 traefik/
+acme.json
