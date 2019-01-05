@@ -53,6 +53,15 @@ if [[ "$numberOfFiles" != "0" ]]; then
     cat customization/tci-master/*.yml >> tci-master-config.yml | true
 fi
 
+mkdir -p .data/jenkins_home/userContent
+cp -f images/tci-small-logo.png .data/jenkins_home/userContent | true
+sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > .data/jenkins_home/userContent/tci.css
+cp -f templates/tci-server/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
+
+if [[ "$action" == "apply" ]]; then
+    exit 0
+fi
+
 if [ ! -n "$TCI_HOST_IP" ]; then
     export TCI_HOST_IP="$(/sbin/ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}' | head -n 1 | sed -e 's/addr://')"
 fi
@@ -75,10 +84,6 @@ fi
 
 if [[ "$action" == "start"  || "$action" == "restart" ]]; then
 
-    mkdir -p .data/jenkins_home/userContent
-    cp -f images/tci-small-logo.png .data/jenkins_home/userContent | true
-    sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > .data/jenkins_home/userContent/tci.css
-    cp -f templates/tci-server/org.codefirst.SimpleThemeDecorator.xml.template .data/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
     docker-compose up -d
     sleep 2
     SECONDS=0
