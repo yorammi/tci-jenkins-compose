@@ -68,5 +68,19 @@ if [[ "$action" == "start"  || "$action" == "restart" ]]; then
         echo ${LOGLINE}
         [[ "${LOGLINE}" == *"Entering quiet mode. Done..."* ]] && pkill -P $$ docker-compose
     done
-    echo "tci-server loaded successfully"
+    action="status"
+fi
+
+if [[ "$action" == "status" ]]; then
+    status=`curl -s http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "HTTP ERROR 401" | wc -l | xargs`
+    if [[ "$status" == "1" ]]; then
+        echo "tci-server is up and running"
+    else
+        status=`curl -s http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "Starting Jenkins" | wc -l | xargs`
+        if [[ "$status" == "1" ]]; then
+            echo "tci-server is starting"
+        else
+            echo "tci-server is down"
+        fi
+    fi
 fi
