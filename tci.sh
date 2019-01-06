@@ -13,6 +13,10 @@ if [[ $# > 0 ]]; then
     action=$1
 fi
 if [[ "$action" == "upgrade" ]]; then
+    rm -rf temp/customization 2> /dev/null | true
+    cp -R customization temp 2> /dev/null | true
+    rm -rf temp/templates 2> /dev/null | true
+    cp -R templates temp 2> /dev/null | true
     if [[ $# > 1 ]]; then
         version=$2
         git checkout $version 2> /dev/null | true
@@ -25,6 +29,12 @@ if [[ "$action" == "upgrade" ]]; then
     mkdir -p info/version
     echo -e "[Version]\t${BLUE}${version}${NC}" > info/version/version.txt
     echo -e "[Hash]\t\t${BLUE}${hash}${NC}" >> info/version/version.txt
+
+    diff1=`diff -q temp/customization/tci-master templates/tci-master | wc -l | xargs`
+    if [[ "diff1" != "0" ]]; then
+        diff2=`diff -q customization/tci-master templates/tci-master | wc -l | xargs`
+    fi
+
     echo -e "*** ${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action ***"
     exit 0
 fi
