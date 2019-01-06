@@ -69,13 +69,12 @@ fi
 echo export TCI_DEBUG_MODE=\'$TCI_DEBUG_MODE\' >> temp/tci.config
 export TCI_DEBUG_MODE=\'$TCI_DEBUG_MODE\'
 
-#read -p "TCI host IP address [$TCI_HOST_IP]? " -r
-#if [[ "$REPLY" != "" ]]; then
-#    TCI_HOST_IP="$REPLY"
-#fi
-#echo export TCI_HOST_IP=$TCI_HOST_IP  >> temp/tci.config
-#export TCI_HOST_IP=$TCI_HOST_IP
-#export TCI_HOST_IP=
+read -p "TCI host IP address (set to * for automatic IP calculation) [$TCI_HOST_IP]? " -r
+if [[ "$REPLY" != "" ]]; then
+    TCI_HOST_IP="$REPLY"
+fi
+echo export TCI_HOST_IP='$TCI_HOST_IP'  >> temp/tci.config
+export TCI_HOST_IP='$TCI_HOST_IP'
 
 cp temp/tci.config tci.config
 

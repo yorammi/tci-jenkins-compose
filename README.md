@@ -20,7 +20,7 @@ In order to establish a <img src="/images/tci-server.png" width="60" height="60"
 
 Once the server is up, you can modify it (e.g. add LDAP configuration, add seed jobs, add credentials and much more) following the instructions as in [tci-bloody-jenkins](https://github.com/TikalCI/tci-bloody-jenkins) and all files in the 'customization' folder.
 
-The _**./tci.sh**_ script have the following actions: **start**, **stop**, **restart**, **info**, **init**, **upgrade**, **status**, **apply**.
+The _**./tci.sh**_ script have the following actions: **start**, **stop**, **restart**, **info**, **init**, **upgrade**, **status**, **apply**, **version**.
 
 The loaded server is already configured to work with [<img src="images/tci-library.png" width="60" height="60"> tci-library](https://github.com/TikalCI/tci-library) so you can start working with it and<br/>use [<img src="images/tci-pipelines.png" width="60" height="60"> tci-pipelines](https://github.com/TikalCI/tci-pipelines) as a reference as well.
 
