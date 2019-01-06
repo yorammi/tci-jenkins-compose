@@ -35,7 +35,7 @@ if [[ "$action" == "upgrade" ]]; then
     if [[ "$diff1" != "0" && "$diff2" != "0" ]]; then
         echo -e "\n${BG_RED}NOTE:${NC} You ${BG_RED}MUST${NC} run a tci-master customization merge with new templates:\n"
         diff3=`diff temp/templates/tci-master templates/tci-master`
-        echo -e $diff3
+        echo $diff3
         echo -e "\nFor more information run: ${BLUE}diff temp/templates/tci-master templates/tci-master${NC}\n"
     fi
 
