@@ -33,8 +33,9 @@ if [[ "$action" == "upgrade" ]]; then
     diff1=`diff -q temp/templates/tci-master templates/tci-master | wc -l | xargs`
     diff2=`diff -q temp/customization/tci-master templates/tci-master | wc -l | xargs`
     if [[ "$diff1" != "0" && "$diff2" != "0" ]]; then
-        echo -e "\n*** ${BG_RED}NOTE:${NC} You ${BG_RED}MUST${NC} run a tci-master customization merge with new templates ***"
-        diff -q temp/templates/tci-master templates/tci-master
+        echo -e "\n*** ${BG_RED}NOTE:${NC} You ${BG_RED}MUST${NC} run a tci-master customization merge with new templates ***\n"
+        diff -q temp/templates/tci-master templates/tci-master | true
+        echo -e "\nFor more information run: ${BLUE}diff temp/templates/tci-master templates/tci-master${NC}\n"
     fi
 
     echo -e "\n*** ${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action ***\n"
