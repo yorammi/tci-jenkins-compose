@@ -73,8 +73,8 @@ read -p "TCI host IP address (set to * for automatic IP calculation) [$TCI_HOST_
 if [[ "$REPLY" != "" ]]; then
     TCI_HOST_IP="$REPLY"
 fi
-echo export TCI_HOST_IP='$TCI_HOST_IP'  >> temp/tci.config
-export TCI_HOST_IP='$TCI_HOST_IP'
+echo export TCI_HOST_IP=\'$TCI_HOST_IP\'  >> temp/tci.config
+export TCI_HOST_IP=\'$TCI_HOST_IP\'
 
 cp temp/tci.config tci.config
 
