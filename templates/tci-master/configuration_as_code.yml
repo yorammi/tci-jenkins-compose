@@ -4,4 +4,6 @@ configuration_as_code:
       elements:
       - cssUrl:
           url: "/userContent/tci.css"
+      - faviconUrl:
+          url: "/userContent/tci-small-logo.png"
 
