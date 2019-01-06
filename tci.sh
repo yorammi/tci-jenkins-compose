@@ -3,8 +3,8 @@
 set -e
 
 BG_RED='\033[0;41;93m'
-BG_GREEN='\033[0;42m'
-BLUE='\033[0;34m'
+BG_GREEN='\033[0;31;42m'
+BLUE='\033[0;94m'
 YELLOW='\033[0;93m'
 NC='\033[0m' # No Color
 
