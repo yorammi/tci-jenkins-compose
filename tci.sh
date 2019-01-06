@@ -30,12 +30,14 @@ if [[ "$action" == "upgrade" ]]; then
     echo -e "[Version]\t${BLUE}${version}${NC}" > info/version/version.txt
     echo -e "[Hash]\t\t${BLUE}${hash}${NC}" >> info/version/version.txt
 
-    diff1=`diff -q temp/customization/tci-master templates/tci-master | wc -l | xargs`
-    if [[ "diff1" != "0" ]]; then
-        diff2=`diff -q customization/tci-master templates/tci-master | wc -l | xargs`
+    diff1=`diff -q temp/templates/tci-master templates/tci-master | wc -l | xargs`
+        diff2=`diff -q temp/customization/tci-master templates/tci-master | wc -l | xargs`
+    if [[ "diff1" != "0" && "diff2" != "0" ]]; then
+        echo -e "*** ${BG_RED}NOTE:${NC} You ${BG_RED}MUST${NC} run a tci-master customization merge with new templates ***"
+        diff -q temp/templates/tci-master templates/tci-master
     fi
 
-    echo -e "*** ${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action ***"
+    echo -e "\n*** ${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action ***"
     exit 0
 fi
 
