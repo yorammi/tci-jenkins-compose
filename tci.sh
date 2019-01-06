@@ -38,7 +38,7 @@ fi
 source templates/tci-server/tci.config.template
 source tci.config
 
-if [[ "$action" == "init" || "$action" == "upgrade" ]]; then
+if [[ "$action" == "init" ]]; then
     echo "Initializing tci-server. For changes to take effect, you'll need to restart the server after that action."
     . ./scripts/init-tci.sh
 fi
