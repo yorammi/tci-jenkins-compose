@@ -15,11 +15,11 @@ fi
 if [[ "$action" == "upgrade" ]]; then
     if [[ $# > 1 ]]; then
         version=$2
-        git checkout version | true
+        git checkout $version 2> /dev/null | true
     else
         version=latest
-        git checkout master | true
-        git pull origin master
+        git checkout master  2> /dev/null | true
+        git pull origin master 2> /dev/null | true
     fi
     hash=`git rev-parse --short=8 HEAD`
     mkdir -p info/version
