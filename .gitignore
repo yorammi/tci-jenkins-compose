@@ -7,3 +7,4 @@ temp/
 customization*/
 traefik/
 acme.json
+info/

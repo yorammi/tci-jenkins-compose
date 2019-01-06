@@ -2,12 +2,31 @@
 
 set -e
 
+BG_RED='\033[0;41;93m'
+BG_GREEN='\033[0;42m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;93m'
+NC='\033[0m' # No Color
+
 action='restart'
 if [[ $# > 0 ]]; then
     action=$1
 fi
 if [[ "$action" == "upgrade" ]]; then
-    git pull origin HEAD
+    if [[ $# > 1 ]]; then
+        version=$2
+        git checkout version | true
+    else
+        version=latest
+        git checkout master | true
+        git pull origin master
+    fi
+    hash=`git rev-parse --short=8 HEAD`
+    mkdir -p info/version
+    echo -e "[Version]\t${BLUE}${version}${NC}" > info/version/version.txt
+    echo -e "[Hash]\t\t${BLUE}${hash}${NC}" >> info/version/version.txt
+    echo -e "*** ${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action ***"
+    exit 0
 fi
 
 
@@ -68,11 +87,19 @@ export GIT_PRIVATE_KEY=`cat $GITHUB_PRIVATE_KEY_FILE_PATH`
 
 
 if [[ "$action" == "info" ]]; then
-    echo [Server host IP address] $TCI_HOST_IP
-    echo [Private SSH key file path] $GITHUB_PRIVATE_KEY_FILE_PATH
-    echo [TCI HTTP port] $JENKINS_HTTP_PORT_FOR_SLAVES
-    echo [TCI JNLP port for slaves] $JENKINS_SLAVE_AGENT_PORT
-    echo [TCI number of master executors] $JENKINS_ENV_EXECUTERS
+    echo -e "\n${BG_RED}[TCI MASTER SERVER INFORMATION]${NC}\n"
+    echo -e "[Server host IP address]\t${BLUE}$TCI_HOST_IP${NC}"
+    echo -e "[Private SSH key file path]\t${BLUE}$GITHUB_PRIVATE_KEY_FILE_PATH${NC}"
+    echo -e "[TCI HTTP port]\t\t\t${BLUE}$JENKINS_HTTP_PORT_FOR_SLAVES${NC}"
+    echo -e "[TCI JNLP port for slaves]\t${BLUE}$JENKINS_SLAVE_AGENT_PORT${NC}"
+    echo -e "[Number of master executors]\t${BLUE}$JENKINS_ENV_EXECUTERS${NC}"
+fi
+
+if [[ "$action" == "info" || "$action" == "version" ]]; then
+    if [ -f info/version/version.txt ]; then
+        echo -e "\n${BG_RED}[TCI MASTER VERSION INFORMATION]${NC}\n"
+        cat info/version/version.txt
+    fi
     exit 0
 fi
 
@@ -88,26 +115,26 @@ if [[ "$action" == "start"  || "$action" == "restart" ]]; then
     SECONDS=0
     docker-compose logs -f | while read LOGLINE
     do
-        echo "[ET ${SECONDS}s] ${LOGLINE}"
+        echo -e "${BLUE}[ET:${SECONDS}s]${NC} ${LOGLINE}"
         [[ "${LOGLINE}" == *"Entering quiet mode. Done..."* ]] && pkill -P $$ docker-compose
     done
     action="status"
 fi
 
-if [[ "$action" == "status" ]]; then
+if [[ "$action" == "status"  || "$action" == "init" ]]; then
     status=`curl -s -I http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "403" | wc -l | xargs`
     if [[ "$status" == "1" ]]; then
-        echo "[TCI status] tci-server is up and running"
+        echo -e "${BLUE}[TCI status] ${BG_GREEN}tci-server is up and running${NC}"
     else
         status=`curl -s -I http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "401" | wc -l | xargs`
         if [[ "$status" == "1" ]]; then
-            echo "[TCI status] tci-server is up and running"
+            echo -e "${BLUE}[TCI status] ${BG_GREEN}tci-server is up and running${NC}"
         else
             status=`curl -s -I http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "503" | wc -l | xargs`
             if [[ "$status" == "1" ]]; then
-                echo "[TCI status] tci-server is starting"
+                echo -e "${BLUE}[TCI status] ${BG_RED}tci-server is starting${NC}"
             else
-                echo "[TCI status] tci-server is down"
+                echo -e "${BLUE}[TCI status] ${BG_RED}tci-server is down${NC}"
             fi
         fi
     fi
