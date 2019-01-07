@@ -13,6 +13,10 @@ if [[ $# > 0 ]]; then
     action=$1
 fi
 if [[ "$action" == "upgrade" ]]; then
+    if [[ -f customization && ! -f setup ]]; then
+        mv customization setup
+    fi
+
     rm -rf temp/customization 2> /dev/null | true
     cp -R customization temp 2> /dev/null | true
     rm -rf temp/templates 2> /dev/null | true
