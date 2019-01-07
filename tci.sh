@@ -46,7 +46,7 @@ function upgrade {
         git checkout master  2> /dev/null | true
         git pull origin master 2> /dev/null | true
     fi
-    hash=`git rev-parse --short=8 HEAD`
+    hash=`git rev-parse --short=8 HEAD` 2> /dev/null | true
     mkdir -p info/version
     echo -e "[Version]\t${BLUE}${version}${NC}" > info/version/version.txt
     echo -e "[Hash]\t\t${BLUE}${hash}${NC}" >> info/version/version.txt
