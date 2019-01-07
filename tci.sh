@@ -146,17 +146,17 @@ function startTciServer {
 function showTciServerStatus {
     status=`curl -s -I http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "403" | wc -l | xargs`
     if [[ "$status" == "1" ]]; then
-        echo -e "/n${BLUE}[TCI status] ${BG_GREEN}tci-server is up and running${NC}/n"
+        echo -e "\n${BLUE}[TCI status] ${BG_GREEN}tci-server is up and running${NC}\n"
     else
         status=`curl -s -I http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "401" | wc -l | xargs`
         if [[ "$status" == "1" ]]; then
-            echo -e "/n${BLUE}[TCI status] ${BG_GREEN}tci-server is up and running${NC}/n"
+            echo -e "\n${BLUE}[TCI status] ${BG_GREEN}tci-server is up and running${NC}\n"
         else
             status=`curl -s -I http://localhost:$JENKINS_HTTP_PORT_FOR_SLAVES | grep "503" | wc -l | xargs`
             if [[ "$status" == "1" ]]; then
-                echo -e "/n${BLUE}[TCI status] ${BG_RED}tci-server is starting${NC}/n"
+                echo -e "\n${BLUE}[TCI status] ${BG_RED}tci-server is starting${NC}\n"
             else
-                echo -e "/n${BLUE}[TCI status] ${BG_RED}tci-server is down${NC}/n"
+                echo -e "\n${BLUE}[TCI status] ${BG_RED}tci-server is down${NC}\n"
             fi
         fi
     fi
