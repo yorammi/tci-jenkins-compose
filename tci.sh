@@ -19,7 +19,8 @@ function usage {
     echo -e "\n  where ${BLUE}<action>${NC} is ..."
     echo -e "\t${BLUE}usage${NC} - show this usage description."
     echo -e "\t${BLUE}version${NC} - show tci-server version information."
-    echo -e "\t${BLUE}status${NC} - show tci-server server & version information."
+    echo -e "\t${BLUE}status${NC} - show tci-server server status & version information."
+    echo -e "\t${BLUE}init${NC} - initialize tci-server settings."
     echo -e "\t${BLUE}start${NC} - start the tci-server."
     echo -e "\t${BLUE}stop${NC} - stop the tci-server."
     echo -e "\t${BLUE}restart${NC} - restart the tci-server."
@@ -72,7 +73,7 @@ function setupTciScript {
     source tci.config
 
     if [[ "$action" == "init" ]]; then
-        echo "Initializing tci-server. For changes to take effect, you'll need to restart the server after that action."
+        echo -e "\n${BLUE}Initializing tci.config file. For changes to take effect, you'll need to restart the server after that action.${NC}\n"
         . ./scripts/init-tci.sh
     fi
 
@@ -111,6 +112,10 @@ function setupTciScript {
         export TCI_HOST_IP="$(/sbin/ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}' | head -n 1 | sed -e 's/addr://')"
     fi
     export GIT_PRIVATE_KEY=`cat $GITHUB_PRIVATE_KEY_FILE_PATH`
+
+    if [[ "$action" == "init" ]]; then
+        exit 0
+    fi
 }
 
 function info {
