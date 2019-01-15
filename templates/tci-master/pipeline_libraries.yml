@@ -1,8 +1,7 @@
 pipeline_libraries:
   tci-library:
     source:
-      remote: git@github.com:TikalCI/tci-library.git
-      credentialsId: gitsshkey
+      remote: https://github.com/TikalCI/tci-library.git
     defaultVersion: master
     implicit: false
     allowVersionOverride: true

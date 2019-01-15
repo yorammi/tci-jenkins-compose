@@ -11,8 +11,7 @@ With this repository, you can establish <img src="images/tci-server.png" width="
 In order to establish a <img src="/images/tci-server.png" width="60" height="60"> **tci-server**, follow the below instructions on the server you want to host it:
 
 1. Make sure you have the following commands installed: **git**, **docker** & **docker-compose**.
-1. Make sure you have an SSH private key file on the hosting server. The default path it looks for is ~/.ssh/id_rsa, but you can configure it to use a different file.
-1. clone this repository (git@github.com:TikalCI/tci.git) to a local folder and cd to it.
+1. clone this repository (https://github.com/TikalCI/tci-server.git) to a local folder and cd to it.
 1. Run _**./tci.sh init**_ to see that the path to the SSH private key file is correct and to set all values.
 1. Run _**./tci.sh start**_ to load the server. 
 1. The first load will take at least 10 minutes, so please wait until the prompt is back.
