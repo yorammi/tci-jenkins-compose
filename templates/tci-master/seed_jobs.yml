@@ -2,7 +2,7 @@ seed_jobs:
   tci-master-sanity-check:
     source:
       remote: https://github.com/TikalCI/tci-pipelines.git
-      branch: 'master'
+      branch: '\${TCI_PIPELINES_BRANCH}'
 
     pipeline: src/pipelines/bootstrap/tci-master-sanity-check/Jenkinsfile
     executeWhen: never
