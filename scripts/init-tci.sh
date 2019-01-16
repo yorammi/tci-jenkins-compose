@@ -52,9 +52,7 @@ function inputTextVariable {
 initTciScript
 initTciConfig
 
-inputVariable "tci-master image" TCI_MASTER_VERSION
-inputVariable "tci-library branch" TCI_LIBRARY_BRANCH
-inputVariable "tci-pipelines branch" TCI_PIPELINES_BRANCH
+inputVariable "tci-master Docker image" TCI_MASTER_VERSION
 inputTextVariable "TCI banner title" TCI_MASTER_TITLE_TEXT
 inputVariable "TCI banner title color" TCI_MASTER_TITLE_COLOR
 inputVariable "TCI banner background color" TCI_MASTER_BANNER_COLOR

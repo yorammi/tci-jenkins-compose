@@ -2,7 +2,7 @@ pipeline_libraries:
   tci-library:
     source:
       remote: https://github.com/TikalCI/tci-library.git
-    defaultVersion: master
+    defaultVersion: lts
     implicit: false
     allowVersionOverride: true
     includeInChangesets: true

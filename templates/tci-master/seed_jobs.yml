@@ -3,7 +3,6 @@ seed_jobs:
     source:
       remote: https://github.com/TikalCI/tci-pipelines.git
       branch: '\${TCI_PIPELINES_BRANCH}'
-
     pipeline: src/pipelines/bootstrap/tci-master-sanity-check/Jenkinsfile
     executeWhen: never
 
