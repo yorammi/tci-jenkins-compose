@@ -119,7 +119,6 @@ function setupTciScript {
 function info {
     echo -e "\n${BG_BLUE}TCI MASTER SERVER INFORMATION${NC}\n"
     echo -e "[Server host IP address]\t${BLUE}$TCI_HOST_IP${NC}"
-    echo -e "[Private SSH key file path]\t${BLUE}$GITHUB_PRIVATE_KEY_FILE_PATH${NC}"
     echo -e "[TCI HTTP port]\t\t\t${BLUE}$JENKINS_HTTP_PORT_FOR_SLAVES${NC}"
     echo -e "[TCI JNLP port for slaves]\t${BLUE}$JENKINS_SLAVE_AGENT_PORT${NC}"
     echo -e "[Number of master executors]\t${BLUE}$JENKINS_ENV_EXECUTERS${NC}"
