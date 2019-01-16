@@ -99,8 +99,8 @@ function setupTciScript {
 
     mkdir -p setup/userContent
     cp -n templates/userContent/* setup/userContent/ 2> /dev/null | true
-    sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > setup/userContent/tci.css
     mkdir -p .data/jenkins_home/userContent
+    sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > setup/userContent/tci.css
     cp setup/userContent/* .data/jenkins_home/userContent 2> /dev/null | true
 
     mkdir -p setup/files
