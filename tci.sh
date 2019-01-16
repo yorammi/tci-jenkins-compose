@@ -73,7 +73,6 @@ function setupTciScript {
     source tci.config
 
     if [[ "$action" == "init" ]]; then
-        echo -e "\n${BLUE}Initializing tci.config file. For changes to take effect, you'll need to restart the server after that action.${NC}\n"
         . ./scripts/init-tci.sh
     fi
 
