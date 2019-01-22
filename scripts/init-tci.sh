@@ -53,13 +53,14 @@ initTciScript
 initTciConfig
 
 inputVariable "tci-master Docker image" TCI_MASTER_VERSION
+inputVariable "TCI host IP address (set to * for automatic IP calculation)" TCI_HOST_IP
+inputVariable "Jenkins server HTTP port" JENKINS_HTTP_PORT_FOR_SLAVES
+inputVariable "Jenkins JNLP port for slaves" JENKINS_SLAVE_AGENT_PORT
+inputTextVariable "TCI customization folder root path" TCI_CUSTOMIZATION_FOLDER
+inputVariable "Number of exeuters on master" JENKINS_ENV_EXECUTERS
 inputTextVariable "TCI banner title" TCI_MASTER_TITLE_TEXT
 inputVariable "TCI banner title color" TCI_MASTER_TITLE_COLOR
 inputVariable "TCI banner background color" TCI_MASTER_BANNER_COLOR
-inputVariable "Jenkins server HTTP port" JENKINS_HTTP_PORT_FOR_SLAVES
-inputVariable "Jenkins JNLP port for slaves" JENKINS_SLAVE_AGENT_PORT
-inputVariable "Number of exeuters on master" JENKINS_ENV_EXECUTERS
-inputVariable "TCI host IP address (set to * for automatic IP calculation)" TCI_HOST_IP
 
 cp temp/tci.config tci.config
 
