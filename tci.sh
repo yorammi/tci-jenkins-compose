@@ -34,11 +34,6 @@ function upgrade {
         mv customization setup
     fi
 
-    mkdir -p temp 2> /dev/null | true
-    rm -rf temp/setup 2> /dev/null | true
-    cp -R setup temp/ 2> /dev/null | true
-    rm -rf temp/templates 2> /dev/null | true
-    cp -R templates temp 2> /dev/null | true
     if [[ $# > 1 ]]; then
         version=$2
         git checkout $version 2> /dev/null | true
@@ -51,14 +46,6 @@ function upgrade {
     mkdir -p info/version
     echo -e "[Version]\t${BLUE}${version}${NC}" > info/version/version.txt
     echo -e "[Hash]\t\t${BLUE}${hash}${NC}" >> info/version/version.txt
-
-    diff1=`diff -q temp/templates/tci-master templates/tci-master | wc -l | xargs`
-    diff2=`diff -q temp/setup/tci-master templates/tci-master | wc -l | xargs`
-    if [[ "$diff1" != "0" && "$diff2" != "0" ]]; then
-        echo -e "\n${BG_RED}NOTE:${NC} You ${BG_RED}MUST${NC} run a tci-master setup merge with new templates."
-        echo -e "\nFor more information run: ${BLUE}diff temp/templates/tci-master templates/tci-master${NC}"
-        echo -e "\t\t     and: ${BLUE}diff temp/setup/tci-master templates/tci-master${NC}\n"
-    fi
 
     echo -e "\n${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action\n"
 }
@@ -90,7 +77,10 @@ function setupTciScript {
     fi
 
     mkdir -p setup/tci-master
-    cp -n templates/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
+    mkdir -p cust/tci-master
+    cp -n templates/cust/tci-master/*.yml cust/tci-master/ 2> /dev/null | true
+    cp -f templates/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
+    cp -f cust/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
     echo "# PLEASE NOTICE:" > tci-master-config.yml
     echo "# This is a generated file, so any change in it will be lost on the next TCI action!" >> tci-master-config.yml
     echo "" >> tci-master-config.yml
