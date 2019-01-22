@@ -63,10 +63,13 @@ function setupTciScript {
         . ./scripts/init-tci.sh
     fi
 
+    mkdir -p cust/docker-compose
     mkdir -p setup/docker-compose
     if [ ! -f setup/docker-compose/docker-compose.yml.template ]; then
         cp templates/docker-compose/docker-compose.yml.template setup/docker-compose/docker-compose.yml.template
     fi
+    cp -n templates/customized/docker-compose/*.yml cust/docker-compose/ 2> /dev/null | true
+    cp -f ${TCI_CUSTOMIZATION_FOLDER}/docker-compose/*.yml setup/docker-compose/ 2> /dev/null | true
     echo "# PLEASE NOTICE:" > docker-compose.yml
     echo "# This is a generated file, so any change in it will be lost on the next TCI action!" >> docker-compose.yml
     echo "" >> docker-compose.yml
@@ -78,7 +81,7 @@ function setupTciScript {
 
     mkdir -p setup/tci-master
     mkdir -p cust/tci-master
-    cp -n templates/cust/tci-master/*.yml cust/tci-master/ 2> /dev/null | true
+    cp -n templates/customized/tci-master/*.yml cust/tci-master/ 2> /dev/null | true
     cp -f templates/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
     cp -f ${TCI_CUSTOMIZATION_FOLDER}/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
     echo "# PLEASE NOTICE:" > tci-master-config.yml
