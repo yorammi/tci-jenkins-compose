@@ -80,7 +80,7 @@ function setupTciScript {
     mkdir -p cust/tci-master
     cp -n templates/cust/tci-master/*.yml cust/tci-master/ 2> /dev/null | true
     cp -f templates/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
-    cp -f cust/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
+    cp -f ${TCI_CUSTOMIZATION_FOLDER}/tci-master/*.yml setup/tci-master/ 2> /dev/null | true
     echo "# PLEASE NOTICE:" > tci-master-config.yml
     echo "# This is a generated file, so any change in it will be lost on the next TCI action!" >> tci-master-config.yml
     echo "" >> tci-master-config.yml
