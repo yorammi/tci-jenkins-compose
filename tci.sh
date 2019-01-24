@@ -91,7 +91,10 @@ function setupTciScript {
     cat setup/tci-master/*.yml >> tci-master-config.yml | true
 
     mkdir -p setup/userContent
+    mkdir -p cust/userContent
+    cp -n templates/customized/userContent/*.yml cust/userContent/ 2> /dev/null | true
     cp -n templates/userContent/* setup/userContent/ 2> /dev/null | true
+    cp -f ${TCI_CUSTOMIZATION_FOLDER}/userContent/* setup/userContent/ 2> /dev/null | true
     mkdir -p .data/jenkins_home/userContent
     sed "s/TCI_MASTER_TITLE_TEXT/${TCI_MASTER_TITLE_TEXT}/ ; s/TCI_MASTER_TITLE_COLOR/${TCI_MASTER_TITLE_COLOR}/ ; s/TCI_MASTER_BANNER_COLOR/${TCI_MASTER_BANNER_COLOR}/" templates/tci-server/tci.css.template > setup/userContent/tci.css
     cp setup/userContent/* .data/jenkins_home/userContent 2> /dev/null | true
