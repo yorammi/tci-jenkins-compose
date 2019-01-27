@@ -7,6 +7,7 @@ function initTciScript {
     BG_GREEN='\033[0;31;42m'
     BG_BLUE='\033[0;44;93m'
     BLUE='\033[0;94m'
+    BOLDBLUE='\033[1;94m'
     YELLOW='\033[0;93m'
     NC='\033[0m' # No Color
 
@@ -15,18 +16,19 @@ function initTciScript {
 
 function usage {
     echo -e "\n${BG_BLUE}TCI command usage${NC}\n"
-    echo -e "${BLUE}tci.sh <action> [option]${NC}"
-    echo -e "\n  where ${BLUE}<action>${NC} is ..."
-    echo -e "\t${BLUE}usage${NC} - show this usage description."
-    echo -e "\t${BLUE}version${NC} - show tci-server version information."
-    echo -e "\t${BLUE}status${NC} - show tci-server server status & version information."
-    echo -e "\t${BLUE}init${NC} - initialize tci-server settings."
-    echo -e "\t${BLUE}start${NC} - start the tci-server."
-    echo -e "\t${BLUE}stop${NC} - stop the tci-server."
-    echo -e "\t${BLUE}restart${NC} - restart the tci-server."
-    echo -e "\t${BLUE}apply${NC} - apply changes in the 'setup' folder on the tci-server."
-    echo -e "\t${BLUE}upgrade [git-tag]${NC} - upgrage the tci-server version. If no git-tag specified, upgrade to the latest on 'master' branch."
-    echo -e "\t${BLUE}log${NC} - tail the docker-compose log."
+    echo -e "${BLUE}tci.sh${NC} ${BOLDBLUE}<action>${NC} ${BLUE}[option]${NC}"
+    echo -e "\n  where ${BOLDBLUE}<action>${NC} is ..."
+    echo -e "\t${BOLDBLUE}usage${NC} - show this usage description."
+    echo -e "\t${BOLDBLUE}version${NC} - show tci-server version information."
+    echo -e "\t${BOLDBLUE}status${NC} - show tci-server server status & version information."
+    echo -e "\t${BOLDBLUE}init${NC} - initialize tci-server settings."
+    echo -e "\t${BOLDBLUE}start${NC} - start the tci-server."
+    echo -e "\t${BOLDBLUE}stop${NC} - stop the tci-server."
+    echo -e "\t${BOLDBLUE}restart${NC} - restart the tci-server."
+    echo -e "\t${BOLDBLUE}apply${NC} - apply changes in the 'setup' folder on the tci-server."
+    echo -e "\t${BOLDBLUE}upgrade [git-tag]${NC} - upgrage the tci-server version. If no git-tag specified, upgrade to the latest on 'master' branch."
+    echo -e "\t${BOLDBLUE}log${NC} - tail the docker-compose log."
+    echo -e "\t${BOLDBLUE}iptest${NC} - test whether the automatic LAN ip detection works OK."
 }
 
 function upgrade {
@@ -48,6 +50,11 @@ function upgrade {
     echo -e "[Hash]\t\t${BLUE}${hash}${NC}" >> info/version/version.txt
 
     echo -e "\n${BG_RED}NOTE:${NC} You need to run again with '${BG_RED}init${NC}' action\n"
+}
+
+function ipTest {
+    export TCI_HOST_IP="$(/sbin/ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}' | head -n 1 | sed -e 's/addr://')"
+    echo -e "\nIP: ${BG_BLUE}${TCI_HOST_IP}${NC}\n"
 }
 
 function setupTciScript {
@@ -178,6 +185,11 @@ if [[ $# > 0 ]]; then
 else
     usage
     exit 1
+fi
+
+if [[ "$action" == "iptest" ]]; then
+    ipTest
+    exit 0
 fi
 
 if [[ "$action" == "upgrade" ]]; then
