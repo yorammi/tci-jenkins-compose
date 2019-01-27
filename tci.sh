@@ -26,7 +26,7 @@ function usage {
     echo -e "\t${BOLDBLUE}stop${NC} - stop the tci-server."
     echo -e "\t${BOLDBLUE}restart${NC} - restart the tci-server."
     echo -e "\t${BOLDBLUE}apply${NC} - apply changes in the 'setup' folder on the tci-server."
-    echo -e "\t${BOLDBLUE}upgrade [git-tag]${NC} - upgrage the tci-server version. If no git-tag specified, upgrade to the latest on 'master' branch."
+    echo -e "\t${BOLDBLUE}upgrade${NC} ${BLUE}[git-tag]${NC} - upgrage the tci-server version. If no git-tag specified, upgrade to the latest on 'master' branch."
     echo -e "\t${BOLDBLUE}log${NC} - tail the docker-compose log."
     echo -e "\t${BOLDBLUE}iptest${NC} - test whether the automatic LAN ip detection works OK."
 }
