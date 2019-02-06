@@ -2,7 +2,7 @@
     width:0px;
     height:0px;
     padding: 19px;
-background: url('/userContent/tci-small-logo.png');
+background: url('/userContent/logo.png');
 }
 #header {
     background-color: TCI_MASTER_BANNER_COLOR;
