@@ -110,6 +110,12 @@ function setupTciScript {
     cp -n -R templates/files/* setup/files/ 2> /dev/null | true
     cp -R setup/files/* . 2> /dev/null | true
 
+    mkdir -p setup/plugins
+    mkdir -p cust/plugins
+    cp -n -R templates/plugins/* setup/plugins/ 2> /dev/null | true
+    cp -f ${TCI_CUSTOMIZATION_FOLDER}/plugins/* setup/plugins/ 2> /dev/null | true
+    export JENKINS_ENV_PLUGINS=`awk -vORS=, '{ print $1 }' setup/plugins/* | sed 's/,$//'`
+
     if [[ ! -n "$TCI_HOST_IP" || "$TCI_HOST_IP" == "*" ]]; then
         export TCI_HOST_IP="$(/sbin/ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}' | head -n 1 | sed -e 's/addr://')"
     fi
