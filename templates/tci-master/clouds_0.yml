@@ -5,6 +5,7 @@ clouds:
     templates:
       - name: tci-jnlp-node
         image: tikalci/tci-jnlp-node:latest
+        mode: NORMAL
         labels:
           - tci-jnlp-node
         remoteFs: /home/jenkins
