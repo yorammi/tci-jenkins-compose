@@ -1,3 +1,4 @@
+configuration_as_code:
   jenkins:
     markupFormatter:
       rawHtml:
