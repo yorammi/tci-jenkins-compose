@@ -71,6 +71,7 @@ function setupTciScript {
     fi
 
     mkdir -p cust/docker-compose
+    rm -rf setup | true
     mkdir -p setup/docker-compose
     if [ ! -f setup/docker-compose/docker-compose.yml.template ]; then
         cp templates/docker-compose/docker-compose.yml.template setup/docker-compose/docker-compose.yml.template
